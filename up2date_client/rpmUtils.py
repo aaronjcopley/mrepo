@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 # some high level utility stuff for rpm handling
 
 # Client code for Update Agent

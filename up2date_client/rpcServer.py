@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 #
 # $Id: rpcServer.py 89799 2006-03-31 15:28:28Z pkilambi $
 

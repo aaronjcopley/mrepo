@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 
 # a url handler for non rhnlib stuff, based _heavily_ on
 # http://diveintomark.org/projects/feed_parser/

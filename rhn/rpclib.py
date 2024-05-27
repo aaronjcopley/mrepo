@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/python2
 #
 # This module contains all the RPC-related functions the RHN code uses
 #

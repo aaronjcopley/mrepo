@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 
 # all the crap that is stored on the rhn side of stuff
 # updating/fetching package lists, channels, etc

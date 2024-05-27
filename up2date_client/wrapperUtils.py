@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 #
 # $Id: wrapperUtils.py 87091 2005-11-15 17:25:11Z alikins $
 

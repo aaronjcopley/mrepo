@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 
 # a dict with "capability name" as the key, and the version
 # as the value.

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 #
 # This file is a portion of the Red Hat Update Agent
 # Copyright (c) 1999 - 2002 Red Hat, Inc.  Distributed under GPL

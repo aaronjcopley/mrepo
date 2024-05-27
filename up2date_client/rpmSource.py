@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 #
 # a chain of responsibilty class for stacking package sources
 # for up2date
