@@ -4,8 +4,8 @@
 
 Summary: Set up repositories from various sources (ISO, RHN, YOU, rsync, http, ftp, ...)
 Name: mrepo
-Version: 0.8.7
-Release: 1
+Version: 0.8.8
+Release: 1.git202405271521
 License: GPL
 Group: System Environment/Base
 URL: http://dag.wieers.com/home-made/mrepo/
@@ -13,7 +13,7 @@ URL: http://dag.wieers.com/home-made/mrepo/
 Packager: Dag Wieers <dag@wieers.com>
 Vendor: Dag Apt Repository, http://dag.wieers.com/apt/
 
-Source: http://dag.wieers.com/home-made/mrepo/mrepo-%{version}.tar.bz2
+Source: mrepo-0.8.7-git202405271521.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildArch: noarch

@@ -1,4 +1,3 @@
-#/usr/bin/env python
 #
 # Helper transport objects
 #
@@ -9,22 +8,21 @@
 #   - Cristian Gafton <gafton@redhat.com> 
 #   - Erik Troan <ewt@redhat.com>
 
-# $Id: transports.py 191145 2010-03-01 10:21:24Z msuchy $
+# $Id: transports.py 102540 2006-09-18 20:19:31Z jbowes $
 
 # Transport objects
 import os
 import sys
 import time
-import string
 from types import IntType, StringType, ListType
 from SmartIO import SmartIO
 
 from UserDictCase import UserDictCase
 
 import connections
-xmlrpclib = connections.xmlrpclib
+import xmlrpclib
 
-__version__ = "$Revision: 191145 $"
+__version__ = "$Revision: 102540 $"
 
 # XXX
 COMPRESS_LEVEL = 6
@@ -349,12 +347,11 @@ class Input:
         if not headers:
             # we need to get them from environment
             if os.environ.has_key("HTTP_CONTENT_TRANSFER_ENCODING"):
-                self.transfer = string.lower(
-                    os.environ["HTTP_CONTENT_TRANSFER_ENCODING"])
+                self.transfer = os.environ["HTTP_CONTENT_TRANSFER_ENCODING"].lower()
             if os.environ.has_key("HTTP_CONTENT_ENCODING"):
-                self.encoding = string.lower(os.environ["HTTP_CONTENT_ENCODING"])
+                self.encoding = os.environ["HTTP_CONTENT_ENCODING"].lower()
             if os.environ.has_key("CONTENT-TYPE"):
-                self.type = string.lower(os.environ["CONTENT-TYPE"])
+                self.type = os.environ["CONTENT-TYPE"].lower()
             if os.environ.has_key("CONTENT_LENGTH"):
                 self.length = int(os.environ["CONTENT_LENGTH"])
             if os.environ.has_key("HTTP_ACCEPT_LANGUAGE"):
@@ -368,7 +365,7 @@ class Input:
             # us with sane values --gaftonc (actually mimetools is the culprit)
             for header in headers.keys():
                 value = headers[header]
-                h = string.lower(header)
+                h = header.lower()
                 if h == "content-length":
                     try:
                         self.length = int(value)
@@ -376,16 +373,16 @@ class Input:
                         self.length = 0
                 elif h == "content-transfer-encoding":
                     # RFC 2045 #6.1: case insensitive
-                    self.transfer = string.lower(value)
+                    self.transfer = value.lower()
                 elif h == "content-encoding":
                     # RFC 2616 #3.5: case insensitive
-                    self.encoding = string.lower(value)
+                    self.encoding = value.lower()
                 elif h == "content-type":
                     # RFC 2616 #3.7: case insensitive
-                    self.type = string.lower(value)
+                    self.type = value.lower()
                 elif h == "accept-language":
                     # RFC 2616 #3.10: case insensitive
-                    self.lang = string.lower(value)
+                    self.lang = value.lower()
                 elif h == "x-package-filename":
                     self.name = value
             
@@ -419,7 +416,7 @@ class Input:
 
     def decode(self, fd = sys.stdin):
         # The octet-stream data are passed right back
-        if self.type in ["application/octet-stream", "application/x-rpm"]:
+        if self.type == "application/octet-stream":
             return InputStream(fd, self.length, self.name, close=fd.close)
         
         if not self.io:
@@ -628,7 +625,7 @@ class BaseOutput:
             # fields into one "field-name: field-value" pair, without
             # changing the semantics of the message, by appending each
             # subsequent field-value to the first, each separated by a comma.
-            self.headers[name] = string.join(map(str, arg), ',')
+            self.headers[name] = ','.join(map(str, arg))
         else:
             self.headers[name] = str(arg)
 
@@ -681,7 +678,7 @@ class BaseOutput:
         # other headers
         self.set_header("X-Transport-Info",
             'Extended Capabilities Transport (C) Red Hat, Inc (version %s)' % 
-            string.split(__version__)[1])
+            __version__.split()[1])
         self.__processed = 1
         
     # reset the transport options
@@ -745,7 +742,7 @@ def lookupTransfer(transfer, strict=0):
         return transfer
     if isinstance(transfer, StringType):
         for i in range(len(Output.transfers)):
-            if Output.transfers[i] == string.lower(transfer):
+            if Output.transfers[i] == transfer.lower():
                 return i
     if strict:
         raise ValueError("Unsupported transfer %s" % transfer)
@@ -762,7 +759,7 @@ def lookupEncoding(encoding, strict=0):
         return encoding
     if isinstance(encoding, StringType):
         for i in range(len(Output.encodings)):
-            if string.lower(encoding) in Output.encodings[i]:
+            if encoding.lower() in Output.encodings[i]:
                 return i
     if strict:
         raise ValueError("Unsupported encoding %s" % encoding)
@@ -781,7 +778,7 @@ class File:
         self.bufferSize=bufferSize
         self.name = ""
         if name:
-            self.name = name[string.rfind(name, "/")+1:]
+            self.name = name[name.rfind("/")+1:]
         self.progressCallback = progressCallback
 
     def __len__(self):

@@ -15,7 +15,7 @@ htmldir = $(datadir)/mrepo/html
 srcdir = $(localstatedir)/mrepo
 wwwdir = $(localstatedir)/www/mrepo
 
-all: *.adoc
+all: *.txt
 
-.adoc:
+.txt:
 	asciidoc $@
